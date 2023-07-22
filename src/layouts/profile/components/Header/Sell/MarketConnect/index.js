@@ -40,7 +40,7 @@ function MarketConnect() {
           Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'You are not approved to sell!',
+              text: 'You are not verified to sell!',
               customClass: {
                 container: 'my-swal-container', // Replace 'my-swal-container' with your desired class name
               },
@@ -125,7 +125,7 @@ function MarketConnect() {
             color="info"
             onClick={handleSubmit}
           >
-          {loading ? 'Submiting...' : 'Submit'}
+          {loading ? 'Selling...' : 'Sell'}
           </SoftButton>
             </center>
       </CardContent>

@@ -342,8 +342,9 @@ function ProfileInfoCard({ title, description, info, social, action }) {
                   <MDBCardImage onClick={handleShow} src={currentUser?.profilePhoto}
                     alt={currentUser?.firstName} className="my-5" style={{ width:80, height:80, borderRadius:80/2, cursor: 'pointer', objectFit: 'cover' }} fluid />
                   <MDBTypography tag="h5">{currentUser?.firstName} {currentUser?.lastName}</MDBTypography>
-                  <MDBCardText>{currentUser?.isApproved === true ? 'Approved' : 'Not Approved'}</MDBCardText>
+                  <MDBCardText>{currentUser?.isApproved === true ? 'Verified' : 'Unverified'}</MDBCardText>
                   <MDBIcon far icon="edit mb-5" />
+                  
                 </MDBCol>
                 <MDBCol md="8">
                   <MDBCardBody className="p-4">

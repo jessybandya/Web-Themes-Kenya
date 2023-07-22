@@ -37,3 +37,13 @@ code {
   max-height: 200px;
   margin-bottom: 10px;
 }
+
+/* smaller screen */
+@media (max-width: 600px){
+  .image-contact{
+    display: none;
+  }
+  .contact3{
+    margin-top: 60px;
+  }
+}

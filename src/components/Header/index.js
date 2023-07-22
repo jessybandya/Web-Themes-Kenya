@@ -17,6 +17,7 @@ import { Modal } from 'react-bootstrap';
 import CloseIcon from '@mui/icons-material/Close';
 import { MDBCardImage } from 'mdb-react-ui-kit';
 import { deepOrange } from '@mui/material/colors';
+import Contact from './Contact';
 
 
 export default function Header() {
@@ -25,6 +26,7 @@ export default function Header() {
   const history = useNavigate()
   const dispatch = useDispatch();
   const [modalShowAbout, setModalShowAbout] = React.useState(false);
+  const [modalShowContact, setModalShowContact] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -78,7 +80,13 @@ const logout = () => {
         <Button style={{
           fontWeight: "bold",
           color:'#fff'
-        }} variant='outlined' onClick={() =>setModalShowAbout(true)}>About</Button>  
+        }} variant='outlined' onClick={() =>setModalShowAbout(true)}>About Us</Button>  
+
+        <Button style={{
+          fontWeight: "bold",
+          color:'#fff',
+          marginLeft:5
+        }} variant='outlined' onClick={() =>setModalShowContact(true)}>Contact Us</Button>  
           </Typography>
           {authId ? (
             <>
@@ -187,7 +195,7 @@ Join us on our mission to empower the next generation of digital innovators and 
     <Typography variant="body2" color="text.secondary">
     Project launch: 8th August, 2023
     <br />
-    Slots: 1,100 students
+    Slots: 1,100 students will be allocated for students in over 10 universities in Kenya
     <br />
     Universities selected for Pioneering and allocate students 
     <br />
@@ -226,13 +234,47 @@ Machakos University -100
     <br />
     <br />
     Training ( online) 
-<p>Tuesday 5 pm - 6pm (EAT) - Fundamentals of Cpanel.
-<p>Wednesday 5 pm - 6pm (EAT)  - The Plate Web</p>
+<p>Tuesday 5 pm - 6pm (EAT) - Fundamentals of Cpanel and the plate web.
+<p>Wednesday 5 pm - 6pm (EAT)  - Customization and selling.</p>
 </p>
-
-
     </Typography>
       </Modal.Body>
+    </Modal>
+
+
+    <Modal
+    show={modalShowContact}
+    onHide={() => setModalShowContact(false)}
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered
+    style={{
+      zIndex:1500
+    }}
+  >
+  <Modal.Header
+  style={{
+    background: 'linear-gradient(310deg, #2E2EFF, #81c784)',
+    color:'#fff',
+    display:'flex',
+    justifyContent:'space-between',
+  }}
+  >
+  <Modal.Title id="contained-modal-title-vcenter">
+  Contact Us
+  </Modal.Title>
+  <CloseIcon onClick={() => setModalShowContact(false)} fontSize="medium" style={{cursor:'pointer'}} />
+</Modal.Header>
+    <Modal.Body
+    style={{
+      height:500,
+      overflowY:'auto',
+      background: 'linear-gradient(310deg, #2E2EFF, #81c784)',
+      color:'#fff'
+    }}
+    >
+    <Contact setModalShowContact={setModalShowContact}/>
+    </Modal.Body>
     </Modal>
     </Box>
   );

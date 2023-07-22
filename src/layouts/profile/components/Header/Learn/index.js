@@ -69,7 +69,7 @@ export default function BasicTable() {
             textGradient
             style={{ fontWeight: 'bold' }}
           >
-            Thur, 5pm - 6pm (E.A.T)
+            Tue, 5pm - 6pm (E.A.T)
           </SoftTypography>
         </GradientBorderTableCell>
         <GradientBorderTableCell>
@@ -96,7 +96,7 @@ export default function BasicTable() {
             textGradient
             style={{fontWeight:'bold'}}
           >
-          Fri, 5pm - 6pm (E.A.T)
+          Wed, 5pm - 6pm (E.A.T)
           </SoftTypography>
             </GradientBorderTableCell>
             <GradientBorderTableCell>

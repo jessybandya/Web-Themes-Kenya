@@ -88,6 +88,7 @@
     "typewriter-effect": "^2.19.0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4",
+    "whatsapp-react-component": "^1.0.4",
     "xlsx": "^0.18.5"
   },
   "scripts": {

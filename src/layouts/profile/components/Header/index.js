@@ -162,7 +162,7 @@ function Header({ firstName, lastName, profilePhoto, isApproved, wpBuilder, spBu
                 {firstName} {lastName}
               </SoftTypography>
               <SoftTypography variant="button" color="text" fontWeight="medium">
-                {isApproved ? 'Approved' : 'Not Approved'}
+                {isApproved ? 'Verified' : 'Unverified'}
               </SoftTypography>
             </SoftBox>
           </Grid>
