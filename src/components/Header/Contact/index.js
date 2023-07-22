@@ -72,9 +72,8 @@ const Contact = ({setModalShowContact}) => {
             </div>
           </div>
           <div className="col-lg-6">
-            <div className="contact-box ml-3">
-              <h1 className="font-weight-light mt-2">Quick Contact</h1>
-              <form className="mt-4">
+            <div className="contact-box">
+              <form className="mt-0">
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="form-group mt-2">
