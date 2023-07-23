@@ -56,10 +56,10 @@ const Contact = ({setModalShowContact}) => {
                 .then(() => {
                   Swal.fire({
                     icon: 'success',
-                    title: 'Message sent successfully to the admin!',
-                    showConfirmButton: false,
-                    timer: 4000
+                    title: 'Message sent successfully!',
+                    text: 'We will get back to you shortly either via phone or email. Thank you!',
                   })
+                  sendEmail()
                   setLoading(false);
                   setFullName('');
                   setEmail('');
@@ -85,6 +85,15 @@ const Contact = ({setModalShowContact}) => {
     };
 
 
+    const sendEmail = () => {
+      const email = 'jessy.bandya5@gmail.com'; // Replace with the email address you want to send the email to
+      const subject = 'Contact Form Submission';
+      const body = `Dear Web Themes Kenya Admin,\n\n${message}\n\nBest regards,\n${fullName}\n${email}\n${phone}`;
+  
+      const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+      window.open(mailtoLink, '_blank');
+    };
 
   return (
     <div className="contact3 py-5">
