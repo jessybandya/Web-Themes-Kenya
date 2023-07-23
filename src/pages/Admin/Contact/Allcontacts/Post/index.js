@@ -91,7 +91,7 @@ function Post({
     marginBottom: '1.5em' // Adjust the spacing as needed
   };
 
-  const paragraphs = message?.split('\n\n').map((paragraph, index) => (
+  const paragraphs = message?.split('\n').map((paragraph, index) => (
     <p key={index} style={paragraphStyle}>{paragraph}</p>
   ));
   return (
