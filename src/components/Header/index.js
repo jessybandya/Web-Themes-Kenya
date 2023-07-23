@@ -83,13 +83,13 @@ const logout = () => {
         <Button style={{
           fontWeight: "bold",
           color:'#fff'
-        }} variant='outlined' onClick={() =>setModalShowAbout(true)}>About Us</Button>  
+        }} variant='outlined' onClick={() =>setModalShowAbout(true)}>About</Button>  
 
         <Button style={{
           fontWeight: "bold",
           color:'#fff',
           marginLeft:5
-        }} variant='outlined' onClick={() =>setModalShowContact(true)}>Contact Us</Button>  
+        }} variant='outlined' onClick={() =>setModalShowContact(true)}>Contact</Button>  
           </Typography>
           {authId ? (
             <>
