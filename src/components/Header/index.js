@@ -76,7 +76,10 @@ const logout = () => {
           <img src={logo} className="App-logo" alt="logo" />
           </IconButton>
           </Link>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>          
+          <Typography style={{
+            display:'flex',
+            alignItems:'center',
+          }} variant="h6" component="div" sx={{ flexGrow: 1 }}>          
         <Button style={{
           fontWeight: "bold",
           color:'#fff'
