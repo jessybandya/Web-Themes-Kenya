@@ -25,6 +25,7 @@ import typography from '../../assets/theme/base/typography'
 import axios from 'axios'
 import Header from '../../components/Header'
 import Members from './Members'
+import Contact from './Contact'
 
 
 function TabPanel(props) {
@@ -67,6 +68,7 @@ function Admin() {
   const [membersData, setMembers] = React.useState([])
   const [verifiedMembers, setVerifiedMembers] = React.useState([])
   const [unVerifiedMembers, setUnverifiedMembers] = React.useState([])
+  const [contacts, setContacts] = React.useState([])
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
   const commaNumber = require('comma-number')
@@ -87,6 +89,12 @@ function Admin() {
   React.useEffect(() => {
     db.collection('users').where('isApproved','==',false).onSnapshot((snapshot) => {
       setUnverifiedMembers(snapshot.docs.map((doc) => doc.data()))
+    })
+  }, [])
+
+  React.useEffect(() => {
+    db.collection('contacts').onSnapshot((snapshot) => {
+      setContacts(snapshot.docs.map((doc) => doc.data()))
     })
   }, [])
 
@@ -165,8 +173,8 @@ let status = (hours < 12)? "Good Morning" : (hours >= 12 && hours < 16)? "Good A
            </Grid>
            <Grid item xs={12} sm={6} xl={3}>
              <MiniStatisticsCard
-               title={{ text: "Orders" }}
-               count={commaNumber(0)}
+               title={{ text: "Contact Us" }}
+               count={commaNumber(contacts.length)}
                percentage={{ color: "success", text: "+5%" }}
                icon={{
                  color: "info",
@@ -178,7 +186,38 @@ let status = (hours < 12)? "Good Morning" : (hours >= 12 && hours < 16)? "Good A
        </SoftBox>
    
        <Box sx={{ bgcolor: 'background.paper' }}>
-          <Members />
+       <AppBar position="static">
+         <Tabs
+           value={value}
+           onChange={handleChange}
+           indicatorColor="secondary"
+           textColor="inherit"
+           variant="fullWidth"
+           aria-label="full width tabs example"
+           style={{zIndex:1,backgroundColor:'#fff'}}
+ 
+         >
+           <Tab label="Members" {...a11yProps(0)} />
+           <Tab label="Contact Us" {...a11yProps(1)} />
+         </Tabs>
+       </AppBar>
+
+       <SwipeableViews
+       axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+       index={value}
+       onChangeIndex={handleChangeIndex}
+       style={{
+         height: '70vh',
+         overflowY: 'auto'
+        }}
+     >
+       <TabPanel value={value} index={0} dir={theme.direction}>
+       <Members />
+       </TabPanel>
+       <TabPanel value={value} index={1} dir={theme.direction}>
+          <Contact />
+       </TabPanel>
+       </SwipeableViews>
        </Box>
      </SoftBox>
        </SoftTypography>

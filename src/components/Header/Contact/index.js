@@ -4,6 +4,7 @@ import SoftButton from '../../../soft-components/SoftButton';
 import UseWhatsapp from 'whatsapp-react-component';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { db } from '../../../firebase';
 
 const Contact = ({setModalShowContact}) => {
     const [fullName, setFullName] = useState('')
@@ -40,16 +41,40 @@ const Contact = ({setModalShowContact}) => {
           });
   
           if (result.isConfirmed) {
-            const senderDetails = `*CONTACT FORM DETAILS*\n*Name:* ${fullName}\n*Phone Number:* ${phone}\n*Email:* ${email}`;
-            const messageWithSenderDetails = `${senderDetails}\n\n*Message*\n${message}`;
-  
-            UseWhatsapp(receiver, messageWithSenderDetails);
-            setLoading(false);
-            setFullName('');
-            setEmail('');
-            setPhone('');
-            setMessage('');
-            setModalShowContact(false);
+                setLoading(true);
+                const id = db.collection('contacts').doc().id;
+                
+                db.collection('contacts').doc(id).set({
+                  id,
+                  fullName,
+                  email,
+                  phone,
+                  message,
+                  timestamp: Date.now(),
+                  isRead: false,
+                })
+                .then(() => {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Message sent successfully to the admin!',
+                    showConfirmButton: false,
+                    timer: 4000
+                  })
+                  setLoading(false);
+                  setFullName('');
+                  setEmail('');
+                  setPhone('');
+                  setMessage('');
+                  setModalShowContact(false);
+                })
+                .catch((error) => {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.message,
+                  })
+                  setLoading(false);
+                })
           } else {
             setLoading(false);
           }
