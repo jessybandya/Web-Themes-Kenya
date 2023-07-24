@@ -8,18 +8,22 @@ import {Button,Modal } from 'react-bootstrap';
 import Allmembers from './Allmembers';
 import { auth, db } from '../../../firebase';
 import SoftTypography from '../../../soft-components/SoftTypography';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import jsPDF from "jspdf";
+import ClearIcon from '@mui/icons-material/Clear';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import DownloadIcon from '@mui/icons-material/Download';
+import EditIcon from '@mui/icons-material/Edit';
+import Editlinks from './Editlinks';
 
 function Members() {
   const [modalShow, setModalShow] = React.useState(false);
   const [posts1, setPosts1] = React.useState([]);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [filteredPosts, setFilteredPosts] = React.useState([]);
+  const [linksData, setLinksData] = React.useState();
   
+
+
   // Fetch data from Firebase Firestore and update `posts1` state
   React.useEffect(() => {
     db.collection('users').onSnapshot((snapshot) => {
@@ -103,6 +107,13 @@ function Members() {
       URL.revokeObjectURL(url);
     }
   };
+
+
+  React.useEffect(() => {
+    db.collection('links').doc('UPcDVs9bv8tz9OmDJe1l').onSnapshot((doc) => {
+      setLinksData(doc.data());
+    });
+  },[])
   
   return (
     <SoftTypography>
@@ -124,10 +135,9 @@ function Members() {
     </IconButton>
 
     <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-    {auth?.currentUser?.uid &&(
       <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
+      <EditIcon onClick={() => setModalShow(true)} style={{color:'#2a68af'}}/>
     </IconButton>   
-    )}   
   </Paper>  
   
   <Allmembers filteredPosts={filteredPosts} searchTerm={searchTerm}/>
@@ -140,12 +150,27 @@ function Members() {
   aria-labelledby="contained-modal-title-vcenter"
   centered
 >
-  <Modal.Header closeButton>
-    <Modal.Title id="contained-modal-title-vcenter">
-      Add Article
-    </Modal.Title>
+  <Modal.Header 
+  style={{
+    display:'flex',
+    justifyContent:'space-between',
+    background: 'linear-gradient(310deg, #2E2EFF, #81c784)',
+    color:'#fff'
+  }}
+  >
+  <Modal.Title id="contained-modal-title-vcenter">
+  Online Meeting Links
+</Modal.Title>
+<ClearIcon onClick={() => setModalShow(false)} fontSize="medium" style={{cursor:'pointer'}} />
   </Modal.Header>
-  <Modal.Body>
+  <Modal.Body
+  style={{
+    background: 'linear-gradient(310deg, #2E2EFF, #81c784)',
+    height:'auto',
+    overflowY:'auto'
+  }}
+  >
+  <Editlinks tuesLink={linksData?.tues} wedLink={linksData?.wed}/>
   </Modal.Body>
 </Modal>
     </div>

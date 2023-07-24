@@ -8,7 +8,7 @@ import { db } from '../../../firebase';
 
 const Contact = ({setModalShowContact}) => {
     const [fullName, setFullName] = useState('')
-    const [email, setEmail] = useState('')
+    const [senderEmail, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
@@ -16,7 +16,7 @@ const Contact = ({setModalShowContact}) => {
 
     const submitToAdmin = () => {
       setLoading(true);
-      if (fullName === '' || email === '' || phone === '' || message === '') {
+      if (fullName === '' || senderEmail === '' || phone === '' || message === '') {
         toast.error('Please fill all fields!', {
           position: toast.POSITION.TOP_CENTER
         });
@@ -28,7 +28,7 @@ const Contact = ({setModalShowContact}) => {
             title: 'Confirm your details',
             html: `Name: ${fullName}<br/>
                    Phone Number: ${phone}<br/>
-                   Email: ${email}<br/><br/>
+                   Email: ${senderEmail}<br/><br/>
                    Message: ${message}`,
             icon: 'question',
             showCancelButton: true,
@@ -42,39 +42,18 @@ const Contact = ({setModalShowContact}) => {
   
           if (result.isConfirmed) {
                 setLoading(true);
-                const id = db.collection('contacts').doc().id;
-                
-                db.collection('contacts').doc(id).set({
-                  id,
-                  fullName,
-                  email,
-                  phone,
-                  message,
-                  timestamp: Date.now(),
-                  isRead: false,
-                })
-                .then(() => {
+                sendEmail()
                   Swal.fire({
                     icon: 'success',
                     title: 'Message sent successfully!',
                     text: 'We will get back to you shortly either via phone or email. Thank you!',
                   })
-                  sendEmail()
-                  setLoading(false);
-                  setFullName('');
-                  setEmail('');
-                  setPhone('');
-                  setMessage('');
-                  setModalShowContact(false);
-                })
-                .catch((error) => {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: error.message,
-                  })
-                  setLoading(false);
-                })
+                    setLoading(false);
+                    setFullName('');
+                    setEmail('');
+                    setPhone('');
+                    setMessage('');
+                    setModalShowContact(false);
           } else {
             setLoading(false);
           }
@@ -86,9 +65,9 @@ const Contact = ({setModalShowContact}) => {
 
 
     const sendEmail = () => {
-      const email = 'jessy.bandya5@gmail.com'; // Replace with the email address you want to send the email to
+      const email = 'WebThemesKenya@gmail.com '; // Replace with the email address you want to send the email to
       const subject = 'Contact Form Submission';
-      const body = `Dear Web Themes Kenya Admin,\n\n${message}\n\nBest regards,\n${fullName}\n${email}\n${phone}`;
+      const body = `Dear Web Themes Kenya Admin,\n\n${message}\n\nBest regards,\n${fullName}\n${senderEmail}\n${phone}`;
   
       const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   
@@ -120,7 +99,7 @@ const Contact = ({setModalShowContact}) => {
                   <div className="col-lg-12">
                     <div className="form-group mt-2">
                       <input className="form-control" type="email"
-                      value={email}
+                      value={senderEmail}
                       onChange={e => setEmail(e.target.value)}
                       placeholder="email address" />
                     </div>

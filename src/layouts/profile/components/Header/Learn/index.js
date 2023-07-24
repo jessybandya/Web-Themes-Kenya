@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SoftTypography from '../../../../../soft-components/SoftTypography';
+import { db } from '../../../../../firebase';
 
 const GradientBorderTableCell = ({ children }) => {
   return (
@@ -27,6 +28,13 @@ const GradientBorderTableCell = ({ children }) => {
 };
 
 export default function BasicTable() {
+  const [linksData, setLinksData] = React.useState();
+
+  React.useEffect(() => {
+    db.collection('links').doc('UPcDVs9bv8tz9OmDJe1l').onSnapshot((doc) => {
+      setLinksData(doc.data());
+    });
+  },[])
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
     <TableContainer sx={{ maxHeight: 440 }}>
@@ -73,7 +81,7 @@ export default function BasicTable() {
           </SoftTypography>
         </GradientBorderTableCell>
         <GradientBorderTableCell>
-          <a href='https://us02web.zoom.us/' target='_blank' rel="noreferrer" style={{ textDecoration: 'none', color: '#000' }}>
+          <a href={linksData?.tues} target='_blank' rel="noreferrer" style={{ textDecoration: 'none', color: '#000' }}>
             <SoftTypography
               variant="button"
               color="info"
@@ -81,7 +89,7 @@ export default function BasicTable() {
               textGradient
               style={{ fontWeight: 'bold' }}
             >
-              Zoom Link
+              Link
             </SoftTypography>
           </a>
         </GradientBorderTableCell>
@@ -100,7 +108,7 @@ export default function BasicTable() {
           </SoftTypography>
             </GradientBorderTableCell>
             <GradientBorderTableCell>
-             <a href='https://us02web.zoom.us/' target='_blank' rel="noreferrer" style={{textDecoration:'none',color:'#000'}}>
+             <a href={linksData?.wed} target='_blank' rel="noreferrer" style={{textDecoration:'none',color:'#000'}}>
              <SoftTypography
              variant="button"
              color="info"
@@ -108,7 +116,7 @@ export default function BasicTable() {
              textGradient
              style={{fontWeight:'bold'}}
            >
-           Zoom Link
+           Link
            </SoftTypography>
              </a>
             </GradientBorderTableCell>

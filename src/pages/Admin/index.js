@@ -174,7 +174,7 @@ let status = (hours < 12)? "Good Morning" : (hours >= 12 && hours < 16)? "Good A
            <Grid item xs={12} sm={6} xl={3}>
              <MiniStatisticsCard
                title={{ text: "Contact Us" }}
-               count={commaNumber(contacts.length)}
+               count={commaNumber(0)}
                percentage={{ color: "success", text: "+5%" }}
                icon={{
                  color: "info",
@@ -186,38 +186,7 @@ let status = (hours < 12)? "Good Morning" : (hours >= 12 && hours < 16)? "Good A
        </SoftBox>
    
        <Box sx={{ bgcolor: 'background.paper' }}>
-       <AppBar position="static">
-         <Tabs
-           value={value}
-           onChange={handleChange}
-           indicatorColor="secondary"
-           textColor="inherit"
-           variant="fullWidth"
-           aria-label="full width tabs example"
-           style={{zIndex:1,backgroundColor:'#fff'}}
- 
-         >
-           <Tab label="Members" {...a11yProps(0)} />
-           <Tab label="Contact Us" {...a11yProps(1)} />
-         </Tabs>
-       </AppBar>
-
-       <SwipeableViews
-       axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-       index={value}
-       onChangeIndex={handleChangeIndex}
-       style={{
-         height: '70vh',
-         overflowY: 'auto'
-        }}
-     >
-       <TabPanel value={value} index={0} dir={theme.direction}>
        <Members />
-       </TabPanel>
-       <TabPanel value={value} index={1} dir={theme.direction}>
-          <Contact />
-       </TabPanel>
-       </SwipeableViews>
        </Box>
      </SoftBox>
        </SoftTypography>
