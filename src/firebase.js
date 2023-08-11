@@ -2,13 +2,13 @@ import firebase from 'firebase';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyAAao5RoGMWb9AyHo-bk-Ilde3L78KS61k",
-    authDomain: "web-themes-kenya.firebaseapp.com",
-    projectId: "web-themes-kenya",
-    storageBucket: "web-themes-kenya.appspot.com",
-    messagingSenderId: "342703668258",
-    appId: "1:342703668258:web:4645db273857c1a58e1e7b",
-    measurementId: "G-QKKV7PY4R4"
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
   };
 
   const firebaseSApp = firebase.initializeApp(firebaseConfig);
